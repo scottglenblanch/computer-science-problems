@@ -4,8 +4,12 @@
   "description": "",
   "main": "n/a",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fibonacci": "node ./algorithms/dynamic-programming/fibonacci/index.js"
   },
   "author": "Scott Blanch",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
