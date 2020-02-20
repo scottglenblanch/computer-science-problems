@@ -3,17 +3,21 @@ const getBaseMemoizationStore = () => ({
 	1: 1
 });
 
-const getFibonacciValue = (num, memoizationStore = getBaseMemoizationStore()) => {
-	const hasValueStored = memoizationStore[num] !== undefined;
-	const value = hasValueStored ?
-		memoizationStore[num] :
-		(
-			getFibonacciValue(num - 1, memoizationStore) +
-			getFibonacciValue(num - 2, memoizationStore)
-		);
+const isNeedToUpdateMemoizationStore = ({num, memoizationStore}) =>
+	memoizationStore[num] === undefined;
 
+const updateMemoizationStore = ({num, memoizationStore}) => {
+	memoizationStore[num] = (
+		getFibonacciValue({num: num - 1, memoizationStore}) +
+		getFibonacciValue({num: num - 2, memoizationStore})
+	);
+};
+
+const getFibonacciValue = ({num, memoizationStore = getBaseMemoizationStore()}) => {
 	// side effect
-	memoizationStore[num] = value;
+	if(isNeedToUpdateMemoizationStore(({num, memoizationStore}))) {
+		updateMemoizationStore({num, memoizationStore})
+	}
 
 	return memoizationStore[num];
 };
